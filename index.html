@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Álvaro Alves - Currículo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .name {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .title {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #3498db;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 0;
+        }
+
+        .sidebar {
+            background: #f8f9fa;
+            padding: 40px 30px;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #e74c3c;
+        }
+
+        .summary {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+        }
+
+        .experience-item {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .job-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .company {
+            font-size: 1.1rem;
+            color: #3498db;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .duration {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .job-description {
+            list-style: none;
+        }
+
+        .job-description li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .job-description li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-size: 0.8rem;
+        }
+
+        .education-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .education-item:hover {
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .degree {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .institution {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .skill-category h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            background: #ecf0f1;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: background 0.3s ease, transform 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-list li:hover {
+            background: #3498db;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .certifications {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .cert-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #e74c3c;
+            transition: transform 0.3s ease;
+        }
+
+        .cert-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .icon {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .name {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid #e9ecef;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .certifications {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .print-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .print-button {
+                display: none;
+            }
+            
+            .header::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="name">Álvaro Alves</h1>
+                <p class="title">Profissional de TI | Analista de Processos | Professor de Informática</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="icon">📱</span>
+                        <span>(85) 98505-4244</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">✉️</span>
+                        <a href="mailto:alvaro93alves@gmail.com">alvaro93alves@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">💼</span>
+                        <a href="https://www.linkedin.com/in/alvaraaalves" target="_blank">LinkedIn</a>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">🔗</span>
+                        <a href="https://github.com/alvaroaaalves/" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <section class="section">
+                    <h2 class="section-title">Formação</h2>
+                    <div class="education-item">
+                        <div class="degree">Bacharelado Engenharia de Computação</div>
+                        <div class="institution">Instituto Federal de Educação, Ciência e Tecnologia do Ceará - IFCE</div>
+                        <div class="duration">(cursando)</div>
+                    </div>
+                    <div class="education-item">
+                        <div class="degree">Técnico de Informática</div>
+                        <div class="institution">Centro Universitário Farias Brito Técnico</div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">Competências</h2>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Técnicas</h4>
+                            <ul class="skill-list">
+                                <li>Python</li>
+                                <li>Power BI</li>
+                                <li>Git/GitHub</li>
+                                <li>Windows Server</li>
+                                <li>Redes de Computadores</li>
+                                <li>Manutenção de Hardware</li>
+                                <li>Banco de Dados</li>
+                                <li>Máquinas Virtuais</li>
+                                <li>Pacote Office</li>
+                                <li>Lógica de Programação</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Interpessoais</h4>
+                            <ul class="skill-list">
+                                <li>Documentação</li>
+                                <li>Organização</li>
+                                <li>Liderança</li>
+                                <li>Solução de Problemas</li>
+                                <li>Trabalho em equipe</li>
+                                <li>Comunicação</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">Certificações</h2>
+                    <div class="certifications">
+                        <div class="cert-item">Green Software Development (2025)</div>
+                        <div class="cert-item">Capacitação em Inteligência Artificial e Aplicações (2024)</div>
+                        <div class="cert-item">Programação com Python</div>
+                        <div class="cert-item">Projetos ágeis com SCRUM (2024)</div>
+                        <div class="cert-item">Implementando Banco de Dados (2024)</div>
+                        <div class="cert-item">Modelagem de dados (2024)</div>
+                        <div class="cert-item">Versionamento de Código com Git e GitHub (2024)</div>
+                        <div class="cert-item">Análise de Dados - Microsoft Power BI (2023)</div>
+                    </div>
+                </section>
+            </aside>
+
+            <main class="content">
+                <section class="section">
+                    <h2 class="section-title">Resumo</h2>
+                    <p class="summary">
+                        Profissional de TI com experiência em suporte técnico, análise de processos e docência em informática. 
+                        Atuação em diagnóstico e reparo de sistemas, administração de redes e gestão de chamados em plataformas 
+                        como Zendesk e Suri. Cursando Engenharia da Computação no IFCE, com foco em desenvolvimento de software, 
+                        bancos de dados e inteligência artificial.
+                    </p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">Experiência Profissional</h2>
+                    
+                    <div class="experience-item">
+                        <div class="job-title">ALTH Tecnologia (empresa própria)</div>
+                        <div class="duration">2022 - Atual</div>
+                        <ul class="job-description">
+                            <li>Diagnóstico e reparos de hardware e software</li>
+                            <li>Instalação e configuração de sistemas operacionais</li>
+                            <li>Gerenciamento de rede e manutenção preventiva</li>
+                            <li>Backup, recuperação de dados e execução de projetos de infraestrutura</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="job-title">Analista de Processos de TI</div>
+                        <div class="company">Pague Menos</div>
+                        <div class="duration">2025 - Atual</div>
+                        <ul class="job-description">
+                            <li>Abertura e gestão de chamados via Zendesk e Suri</li>
+                            <li>Análise de fluxos de trabalho para identificar gargalos e propor soluções</li>
+                            <li>Suporte técnico remoto e otimização de processos de TI</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="job-title">Professor de Informática</div>
+                        <div class="company">Grau Técnico</div>
+                        <div class="duration">2022 - 2025</div>
+                        <ul class="job-description">
+                            <li>Ministração de aulas de informática</li>
+                            <li>Elaboração de conteúdos e métodos didáticos</li>
+                            <li>Acompanhamento do progresso dos alunos</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="job-title">Técnico de TI</div>
+                        <div class="company">Colégio Juvenal De Carvalho</div>
+                        <div class="duration">2020 - 2023</div>
+                        <ul class="job-description">
+                            <li>Manutenção de rede (roteadores, switches, access points) e servidores (Mikrotik e Windows Server)</li>
+                            <li>Manutenção de equipamentos e instalação de softwares</li>
+                            <li>Atendimento a chamados de suporte técnico</li>
+                            <li>Solicitação de compra de equipamentos e serviços da área de TI</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="job-title">HelpDesk</div>
+                        <div class="company">Multiplay Telecom - Videomar Rede Nordeste</div>
+                        <div class="duration">2015 - 2019</div>
+                        <ul class="job-description">
+                            <li>Atendimento ao cliente</li>
+                            <li>Suporte remoto ao link de internet</li>
+                            <li>Agendamento de visitas técnicas</li>
+                            <li>Configuração e ajuste no router do cliente</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <button class="print-button" onclick="window.print()">🖨️ Imprimir</button>
+
+    <script>
+        // Adiciona animações suaves ao scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observa todos os elementos com animação
+            document.querySelectorAll('.experience-item, .education-item, .skill-category, .cert-item').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+
+            // Efeito de digitação no nome
+            const nameElement = document.querySelector('.name');
+            const originalText = nameElement.textContent;
+            nameElement.textContent = '';
+            
+            let i = 0;
+            const typeWriter = () => {
+                if (i < originalText.length) {
+                    nameElement.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            };
+            
+            setTimeout(typeWriter, 500);
+        });
+
+        // Adiciona efeito de hover nas skills
+        document.querySelectorAll('.skill-list li').forEach(skill => {
+            skill.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05) rotate(2deg)';
+            });
+            
+            skill.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+    </script>
+</body>
+</html>
+
