@@ -424,7 +424,7 @@ body {
     transform: translateY(0);
 }
 
-/* Estilos de Ajuste Temporários Durante a Exportação do PDF */
+/* Ajustes de Estrutura Gerais para o PDF */
 .pdf-export {
     width: 800px !important;
     margin: 0 auto !important;
@@ -435,6 +435,119 @@ body {
 .pdf-export .reveal {
     opacity: 1 !important;
     transform: none !important;
+}
+
+/* PDF em Modo Escuro (Cores Sólidas para Captura Perfeita) */
+[data-theme="dark"] .pdf-export {
+    background-color: #1e293b !important;
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .pdf-export .header {
+    background-color: #0f172a !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .pdf-export .sidebar {
+    background-color: #0f172a !important;
+    border-right: 1px solid #334155 !important;
+}
+
+[data-theme="dark"] .pdf-export .content {
+    background-color: #1e293b !important;
+}
+
+[data-theme="dark"] .pdf-export .name {
+    color: #ffffff !important;
+    text-shadow: none !important;
+}
+
+[data-theme="dark"] .pdf-export .title {
+    color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .pdf-export .section-title {
+    color: #38bdf8 !important;
+    border-bottom-color: #38bdf8 !important;
+}
+
+[data-theme="dark"] .pdf-export .job-title, 
+[data-theme="dark"] .pdf-export .degree, 
+[data-theme="dark"] .pdf-export .skill-category h3 {
+    color: #38bdf8 !important;
+}
+
+[data-theme="dark"] .pdf-export .summary, 
+[data-theme="dark"] .pdf-export .job-description li,
+[data-theme="dark"] .pdf-export .institution {
+    color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .pdf-export .experience-item, 
+[data-theme="dark"] .pdf-export .education-item, 
+[data-theme="dark"] .pdf-export .skill-category, 
+[data-theme="dark"] .pdf-export .cert-item {
+    background-color: #0f172a !important;
+    border-color: #334155 !important;
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .pdf-export .skill-list li {
+    background-color: #334155 !important;
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .pdf-export .contact-item a {
+    color: #ffffff !important;
+}
+
+/* PDF em Modo Claro (Cores Sólidas) */
+[data-theme="light"] .pdf-export {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+}
+
+[data-theme="light"] .pdf-export .header {
+    background-color: #2c3e50 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+[data-theme="light"] .pdf-export .sidebar {
+    background-color: #f8f9fa !important;
+    border-right: 1px solid #e9ecef !important;
+}
+
+[data-theme="light"] .pdf-export .content {
+    background-color: #ffffff !important;
+}
+
+[data-theme="light"] .pdf-export .section-title, 
+[data-theme="light"] .pdf-export .job-title, 
+[data-theme="light"] .pdf-export .degree, 
+[data-theme="light"] .pdf-export .skill-category h3 {
+    color: #2c3e50 !important;
+}
+
+[data-theme="light"] .pdf-export .summary, 
+[data-theme="light"] .pdf-export .job-description li,
+[data-theme="light"] .pdf-export .institution {
+    color: #555555 !important;
+}
+
+[data-theme="light"] .pdf-export .experience-item, 
+[data-theme="light"] .pdf-export .education-item, 
+[data-theme="light"] .pdf-export .skill-category, 
+[data-theme="light"] .pdf-export .cert-item {
+    background-color: #f8f9fa !important;
+    border-color: #e9ecef !important;
+    color: #333333 !important;
+}
+
+[data-theme="light"] .pdf-export .skill-list li {
+    background-color: #ecf0f1 !important;
+    color: #333333 !important;
 }
 
 /* Responsividade */
