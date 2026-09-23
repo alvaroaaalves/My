@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -195,7 +195,11 @@
         </div>
     </div>
     
-    <button class="print-button" id="printBtn" aria-label="Imprimir ou salvar PDF do currículo">🖨️ Imprimir / Salvar PDF</button>
+    <!-- Botões Flutuantes -->
+    <div class="floating-actions">
+        <button class="action-btn" id="themeToggleBtn" aria-label="Alternar tema claro/escuro">☀️ Modo Claro</button>
+        <button class="action-btn print-btn" id="printBtn" aria-label="Imprimir ou salvar PDF do currículo">🖨️ Imprimir / PDF</button>
+    </div>
 
     <!-- Script JS Externo -->
     <script src="script.js" defer></script>
