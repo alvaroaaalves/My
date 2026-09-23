@@ -25,39 +25,43 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // 2. Geração Dinâmica de PDF via html2pdf
+    // 2. Geração Dinâmica de PDF respeitando o Tema Ativo
     const downloadPdfBtn = document.getElementById('downloadPdfBtn');
     if (downloadPdfBtn) {
         downloadPdfBtn.addEventListener('click', function () {
             const element = document.getElementById('cv-content');
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+
+            // Define a cor de fundo do canvas conforme o tema selecionado
+            const canvasBgColor = currentTheme === 'dark' ? '#1e293b' : '#ffffff';
 
             // Feedback visual no botão
             const originalText = downloadPdfBtn.textContent;
             downloadPdfBtn.textContent = '⏳ Gerando PDF...';
             downloadPdfBtn.disabled = true;
 
-            // Aplica estilos de impressão temporários para o PDF sair perfeito
-            element.classList.add('pdf-mode');
+            // Aplica classe auxiliar para ajustar a largura da página no PDF
+            element.classList.add('pdf-export');
 
             // Garante que todos os elementos estão visíveis
             document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
 
             const options = {
-                margin:       [10, 10, 10, 10],
-                filename:     'Curriculo_Alvaro_Alves_NOC.pdf',
+                margin:       [5, 5, 5, 5],
+                filename:     `Curriculo_Alvaro_Alves_NOC_${currentTheme}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, logging: false },
+                html2canvas:  { scale: 2, useCORS: true, logging: false, backgroundColor: canvasBgColor },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
             // Gera e baixa o arquivo
             html2pdf().set(options).from(element).save().then(() => {
-                element.classList.remove('pdf-mode');
+                element.classList.remove('pdf-export');
                 downloadPdfBtn.textContent = originalText;
                 downloadPdfBtn.disabled = false;
             }).catch(err => {
                 console.error('Erro ao gerar PDF:', err);
-                element.classList.remove('pdf-mode');
+                element.classList.remove('pdf-export');
                 downloadPdfBtn.textContent = originalText;
                 downloadPdfBtn.disabled = false;
             });
