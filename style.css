@@ -1,101 +1,498 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // 1. Gerenciamento do Tema Claro / Escuro (Padrão: Dark)
-    const themeToggleBtn = document.getElementById('themeToggleBtn');
-    
-    // Obtém o tema salvo pelo usuário ou define 'dark' como o padrão
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateToggleBtnText(savedTheme);
+/* Variáveis para Tema Claro */
+:root {
+    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --container-bg: #ffffff;
+    --sidebar-bg: #f8f9fa;
+    --text-primary: #333333;
+    --text-secondary: #555555;
+    --title-color: #2c3e50;
+    --card-bg: #f8f9fa;
+    --card-inner-bg: #ffffff;
+    --border-color: #e9ecef;
+    --accent-color: #3498db;
+    --accent-hover: #2980b9;
+    --badge-bg: #ecf0f1;
+    --badge-text: #333333;
+    --duration-color: #7f8c8d;
+    --shadow-color: rgba(0, 0, 0, 0.15);
+    --status-bg: rgba(46, 204, 113, 0.15);
+    --status-color: #27ae60;
+}
 
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', function () {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateToggleBtnText(newTheme);
-        });
+/* Variáveis para Tema Escuro (Padrão) */
+[data-theme="dark"] {
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    --container-bg: #1e293b;
+    --sidebar-bg: #0f172a;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --title-color: #38bdf8;
+    --card-bg: #0f172a;
+    --card-inner-bg: #1e293b;
+    --border-color: #334155;
+    --accent-color: #38bdf8;
+    --accent-hover: #0284c7;
+    --badge-bg: #334155;
+    --badge-text: #f1f5f9;
+    --duration-color: #94a3b8;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --status-bg: rgba(52, 211, 153, 0.15);
+    --status-color: #34d399;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    padding: 20px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--container-bg);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px var(--shadow-color);
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease-out;
+    transition: background 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
     }
-
-    function updateToggleBtnText(theme) {
-        if (themeToggleBtn) {
-            themeToggleBtn.textContent = theme === 'dark' ? '☀️ Modo Claro' : '🌙 Modo Escuro';
-        }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
+}
 
-    // 2. Geração Dinâmica de PDF via html2pdf
-    const downloadPdfBtn = document.getElementById('downloadPdfBtn');
-    if (downloadPdfBtn) {
-        downloadPdfBtn.addEventListener('click', function () {
-            const element = document.getElementById('cv-content');
+.header {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
 
-            // Feedback visual no botão
-            const originalText = downloadPdfBtn.textContent;
-            downloadPdfBtn.textContent = '⏳ Gerando PDF...';
-            downloadPdfBtn.disabled = true;
+.header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
 
-            // Aplica estilos de impressão temporários para o PDF sair perfeito
-            element.classList.add('pdf-mode');
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
 
-            // Garante que todos os elementos estão visíveis
-            document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+.header-content {
+    position: relative;
+    z-index: 1;
+}
 
-            const options = {
-                margin:       [10, 10, 10, 10],
-                filename:     'Curriculo_Alvaro_Alves_NOC.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, logging: false },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
+.name {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    min-height: 3.6rem;
+}
 
-            // Gera e baixa o arquivo
-            html2pdf().set(options).from(element).save().then(() => {
-                element.classList.remove('pdf-mode');
-                downloadPdfBtn.textContent = originalText;
-                downloadPdfBtn.disabled = false;
-            }).catch(err => {
-                console.error('Erro ao gerar PDF:', err);
-                element.classList.remove('pdf-mode');
-                downloadPdfBtn.textContent = originalText;
-                downloadPdfBtn.disabled = false;
-            });
-        });
+.title {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    margin-bottom: 15px;
+}
+
+/* Badge de Status */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--status-bg);
+    color: var(--status-color);
+    border: 1px solid var(--status-color);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--status-color);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(52, 211, 153, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.3s ease;
+}
+
+.contact-item:hover {
+    transform: translateY(-2px);
+}
+
+.contact-item a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: var(--accent-color);
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0;
+}
+
+.sidebar {
+    background: var(--sidebar-bg);
+    padding: 40px 30px;
+    border-right: 1px solid var(--border-color);
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.content {
+    padding: 40px;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--title-color);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--accent-color);
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: #e74c3c;
+}
+
+.summary {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    text-align: justify;
+}
+
+.experience-item {
+    margin-bottom: 30px;
+    padding: 25px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border-left: 4px solid var(--accent-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.experience-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.job-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--title-color);
+    margin-bottom: 5px;
+}
+
+.company {
+    font-size: 1.1rem;
+    color: var(--accent-color);
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.duration {
+    color: var(--duration-color);
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.job-description {
+    list-style: none;
+}
+
+.job-description li {
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+    color: var(--text-secondary);
+}
+
+.job-description li::before {
+    content: '▶';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-size: 0.8rem;
+}
+
+.education-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: var(--card-inner-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+.education-item:hover {
+    box-shadow: 0 3px 10px var(--shadow-color);
+}
+
+.degree {
+    font-weight: 600;
+    color: var(--title-color);
+    margin-bottom: 5px;
+}
+
+.institution {
+    color: var(--duration-color);
+    font-size: 0.95rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.skill-category {
+    background: var(--card-inner-bg);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.skill-category h3 {
+    color: var(--title-color);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.skill-list {
+    list-style: none;
+}
+
+.skill-list li {
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    background: var(--badge-bg);
+    color: var(--badge-text);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: background 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    cursor: default;
+}
+
+.skill-list li:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: scale(1.05) rotate(1deg);
+}
+
+.certifications {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.cert-item {
+    background: var(--card-inner-bg);
+    color: var(--text-primary);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #e74c3c;
+    border-top: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.cert-item:hover {
+    transform: translateY(-2px);
+}
+
+.icon {
+    margin-right: 8px;
+}
+
+/* Container Botões Flutuantes */
+.floating-actions {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.action-btn {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+.download-btn {
+    background: #27ae60;
+}
+
+.download-btn:hover {
+    background: #219150;
+}
+
+/* Animação de Scroll */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Estilos aplicados no momento da geração do PDF */
+.pdf-mode {
+    background: #ffffff !important;
+    color: #333333 !important;
+}
+
+.pdf-mode .header {
+    background: #2c3e50 !important;
+    color: #ffffff !important;
+}
+
+.pdf-mode .sidebar {
+    background: #f8f9fa !important;
+    border-right: 1px solid #e9ecef !important;
+}
+
+.pdf-mode .section-title, 
+.pdf-mode .job-title, 
+.pdf-mode .degree, 
+.pdf-mode .skill-category h3 {
+    color: #2c3e50 !important;
+}
+
+.pdf-mode .summary, 
+.pdf-mode .job-description li {
+    color: #555555 !important;
+}
+
+.pdf-mode .experience-item, 
+.pdf-mode .education-item, 
+.pdf-mode .skill-category, 
+.pdf-mode .cert-item {
+    background: #ffffff !important;
+    border-color: #e9ecef !important;
+    box-shadow: none !important;
+}
+
+.pdf-mode .skill-list li {
+    background: #ecf0f1 !important;
+    color: #333333 !important;
+}
+
+.pdf-mode .status-badge {
+    display: none !important;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
     }
-
-    // 3. Animação de revelação na rolagem da página (IntersectionObserver)
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                obs.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // 4. Efeito de digitação suave no título principal
-    const nameElement = document.querySelector('.name');
-    if (nameElement) {
-        const fullText = nameElement.textContent;
-        nameElement.textContent = '';
-
-        let i = 0;
-        const typeWriter = () => {
-            if (i < fullText.length) {
-                nameElement.textContent += fullText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 80);
-            }
-        };
-
-        setTimeout(typeWriter, 300);
+    .name {
+        font-size: 2rem;
+        min-height: auto;
     }
-});
+    .contact-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .skills-grid, .certifications {
+        grid-template-columns: 1fr;
+    }
+    .floating-actions {
+        bottom: 20px;
+        right: 20px;
+        flex-direction: column;
+    }
+}
