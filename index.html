@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Álvaro Alves - Currículo</title>
+    <title>Álvaro Alves - Currículo | Profissional de TI</title>
+    
+    <!-- Meta tags para compartilhamento em redes sociais (WhatsApp, LinkedIn, etc.) -->
+    <meta property="oh:title" content="Álvaro Alves - Currículo Profissional">
+    <meta property="og:description" content="Profissional de TI com 11 anos de experiência em suporte, análise de processos e docência.">
+    <meta property="og:type" content="website">
+
     <style>
         * {
             margin: 0;
@@ -359,6 +365,8 @@
             .container {
                 box-shadow: none;
                 border-radius: 0;
+                width: 100%;
+                max-width: 100%;
             }
             
             .print-button {
@@ -380,7 +388,7 @@
                 <div class="contact-info">
                     <div class="contact-item">
                         <span class="icon">📱</span>
-                        <a href="http://wa.me/5585985054244" target="_blank">(85)98505-4244</a>
+                        <a href="http://wa.me/5585985054244" target="_blank">(85) 98505-4244</a>
                     </div>
                     <div class="contact-item">
                         <span class="icon">✉️</span>
@@ -536,10 +544,10 @@
         </div>
     </div>
     
-    <!-- Este é um comentário em HTML<button class="print-button" onclick="window.print()">🖨️ Imprimir</button> -->
+    <!-- Botão flutuante de impressão -->
+    <button class="print-button" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
     
     <script>
-        // Adiciona animações suaves ao scroll
         document.addEventListener('DOMContentLoaded', function() {
             const observerOptions = {
                 threshold: 0.1,
@@ -555,7 +563,6 @@
                 });
             }, observerOptions);
 
-            // Observa todos os elementos com animação
             document.querySelectorAll('.experience-item, .education-item, .skill-category, .cert-item').forEach(el => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(20px)';
@@ -563,7 +570,6 @@
                 observer.observe(el);
             });
 
-            // Efeito de digitação no nome
             const nameElement = document.querySelector('.name');
             const originalText = nameElement.textContent;
             nameElement.textContent = '';
@@ -580,7 +586,6 @@
             setTimeout(typeWriter, 500);
         });
 
-        // Adiciona efeito de hover nas skills
         document.querySelectorAll('.skill-list li').forEach(skill => {
             skill.addEventListener('mouseenter', function() {
                 this.style.transform = 'scale(1.05) rotate(2deg)';
@@ -593,4 +598,3 @@
     </script>
 </body>
 </html>
-
