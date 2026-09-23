@@ -9,18 +9,21 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
 
-    <!-- Meta tags Open Graph para compartilhamento (WhatsApp, LinkedIn, etc) -->
+    <!-- Meta tags Open Graph -->
     <meta property="og:title" content="Álvaro Alves - Currículo Profissional | TI e NOC">
     <meta property="og:description" content="Profissional de TI atuando no NOC da FBR Digital. Experiência em suporte, redes e infraestrutura.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://alvaroaaalves.github.io/">
     <meta property="og:image" content="https://alvaroaaalves.github.io/og-image.jpg">
 
+    <!-- Biblioteca para conversão de HTML para PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- Folha de Estilos Externa -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="cv-content">
         <header class="header">
             <div class="header-content">
                 <h1 class="name">Álvaro Alves</h1>
@@ -205,8 +208,7 @@
     <!-- Botões Flutuantes -->
     <div class="floating-actions">
         <button class="action-btn" id="themeToggleBtn" aria-label="Alternar tema claro/escuro">☀️ Modo Claro</button>
-        <a href="Curriculo_Alvaro_Alves_NOC.pdf" download class="action-btn download-btn" aria-label="Baixar PDF do currículo">📄 Baixar PDF</a>
-        <button class="action-btn print-btn" id="printBtn" aria-label="Imprimir currículo">🖨️ Imprimir</button>
+        <button class="action-btn download-btn" id="downloadPdfBtn" aria-label="Baixar PDF do currículo">📄 Baixar PDF</button>
     </div>
 
     <!-- Script JS Externo -->
