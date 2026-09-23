@@ -9,11 +9,12 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
 
-    <!-- Meta tags Open Graph para compartilhamento -->
+    <!-- Meta tags Open Graph para compartilhamento (WhatsApp, LinkedIn, etc) -->
     <meta property="og:title" content="Álvaro Alves - Currículo Profissional | TI e NOC">
     <meta property="og:description" content="Profissional de TI atuando no NOC da FBR Digital. Experiência em suporte, redes e infraestrutura.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://alvaroaaalves.github.io/">
+    <meta property="og:image" content="https://alvaroaaalves.github.io/og-image.jpg">
 
     <!-- Folha de Estilos Externa -->
     <link rel="stylesheet" href="style.css">
@@ -24,6 +25,12 @@
             <div class="header-content">
                 <h1 class="name">Álvaro Alves</h1>
                 <p class="title">Analista de NOC | Profissional de TI | Engenharia de Computação</p>
+                
+                <!-- Badge de Status -->
+                <div class="status-badge">
+                    <span class="status-dot"></span> Disponível para Oportunidades em TI & NOC
+                </div>
+
                 <div class="contact-info">
                     <div class="contact-item">
                         <span class="icon" aria-hidden="true">📱</span>
@@ -198,7 +205,8 @@
     <!-- Botões Flutuantes -->
     <div class="floating-actions">
         <button class="action-btn" id="themeToggleBtn" aria-label="Alternar tema claro/escuro">☀️ Modo Claro</button>
-        <button class="action-btn print-btn" id="printBtn" aria-label="Imprimir ou salvar PDF do currículo">🖨️ Imprimir / PDF</button>
+        <a href="Curriculo_Alvaro_Alves_NOC.pdf" download class="action-btn download-btn" aria-label="Baixar PDF do currículo">📄 Baixar PDF</a>
+        <button class="action-btn print-btn" id="printBtn" aria-label="Imprimir currículo">🖨️ Imprimir</button>
     </div>
 
     <!-- Script JS Externo -->
