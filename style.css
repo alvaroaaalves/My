@@ -424,50 +424,17 @@ body {
     transform: translateY(0);
 }
 
-/* Estilos aplicados no momento da geração do PDF */
-.pdf-mode {
-    background: #ffffff !important;
-    color: #333333 !important;
-}
-
-.pdf-mode .header {
-    background: #2c3e50 !important;
-    color: #ffffff !important;
-}
-
-.pdf-mode .sidebar {
-    background: #f8f9fa !important;
-    border-right: 1px solid #e9ecef !important;
-}
-
-.pdf-mode .section-title, 
-.pdf-mode .job-title, 
-.pdf-mode .degree, 
-.pdf-mode .skill-category h3 {
-    color: #2c3e50 !important;
-}
-
-.pdf-mode .summary, 
-.pdf-mode .job-description li {
-    color: #555555 !important;
-}
-
-.pdf-mode .experience-item, 
-.pdf-mode .education-item, 
-.pdf-mode .skill-category, 
-.pdf-mode .cert-item {
-    background: #ffffff !important;
-    border-color: #e9ecef !important;
+/* Estilos de Ajuste Temporários Durante a Exportação do PDF */
+.pdf-export {
+    width: 800px !important;
+    margin: 0 auto !important;
+    border-radius: 0 !important;
     box-shadow: none !important;
 }
 
-.pdf-mode .skill-list li {
-    background: #ecf0f1 !important;
-    color: #333333 !important;
-}
-
-.pdf-mode .status-badge {
-    display: none !important;
+.pdf-export .reveal {
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 /* Responsividade */
