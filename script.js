@@ -25,11 +25,42 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // 2. Ação do Botão de Impressão
-    const printButton = document.getElementById('printBtn');
-    if (printButton) {
-        printButton.addEventListener('click', function () {
-            window.print();
+    // 2. Geração Dinâmica de PDF via html2pdf
+    const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+    if (downloadPdfBtn) {
+        downloadPdfBtn.addEventListener('click', function () {
+            const element = document.getElementById('cv-content');
+
+            // Feedback visual no botão
+            const originalText = downloadPdfBtn.textContent;
+            downloadPdfBtn.textContent = '⏳ Gerando PDF...';
+            downloadPdfBtn.disabled = true;
+
+            // Aplica estilos de impressão temporários para o PDF sair perfeito
+            element.classList.add('pdf-mode');
+
+            // Garante que todos os elementos estão visíveis
+            document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+
+            const options = {
+                margin:       [10, 10, 10, 10],
+                filename:     'Curriculo_Alvaro_Alves_NOC.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, logging: false },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Gera e baixa o arquivo
+            html2pdf().set(options).from(element).save().then(() => {
+                element.classList.remove('pdf-mode');
+                downloadPdfBtn.textContent = originalText;
+                downloadPdfBtn.disabled = false;
+            }).catch(err => {
+                console.error('Erro ao gerar PDF:', err);
+                element.classList.remove('pdf-mode');
+                downloadPdfBtn.textContent = originalText;
+                downloadPdfBtn.disabled = false;
+            });
         });
     }
 
