@@ -424,6 +424,52 @@ body {
     transform: translateY(0);
 }
 
+/* Estilos aplicados no momento da geração do PDF */
+.pdf-mode {
+    background: #ffffff !important;
+    color: #333333 !important;
+}
+
+.pdf-mode .header {
+    background: #2c3e50 !important;
+    color: #ffffff !important;
+}
+
+.pdf-mode .sidebar {
+    background: #f8f9fa !important;
+    border-right: 1px solid #e9ecef !important;
+}
+
+.pdf-mode .section-title, 
+.pdf-mode .job-title, 
+.pdf-mode .degree, 
+.pdf-mode .skill-category h3 {
+    color: #2c3e50 !important;
+}
+
+.pdf-mode .summary, 
+.pdf-mode .job-description li {
+    color: #555555 !important;
+}
+
+.pdf-mode .experience-item, 
+.pdf-mode .education-item, 
+.pdf-mode .skill-category, 
+.pdf-mode .cert-item {
+    background: #ffffff !important;
+    border-color: #e9ecef !important;
+    box-shadow: none !important;
+}
+
+.pdf-mode .skill-list li {
+    background: #ecf0f1 !important;
+    color: #333333 !important;
+}
+
+.pdf-mode .status-badge {
+    display: none !important;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .main-content {
@@ -448,53 +494,5 @@ body {
         bottom: 20px;
         right: 20px;
         flex-direction: column;
-    }
-}
-
-/* Impressão / PDF */
-@media print {
-    body {
-        background: white !important;
-        color: #000 !important;
-        padding: 0;
-    }
-    .container {
-        box-shadow: none !important;
-        border-radius: 0 !important;
-        background: white !important;
-        width: 100%;
-        max-width: 100%;
-    }
-    .header {
-        background: none !important;
-        color: #000 !important;
-        padding: 10px 0;
-        text-align: left;
-    }
-    .name {
-        color: #000 !important;
-        text-shadow: none !important;
-        font-size: 2.2rem;
-        min-height: auto;
-    }
-    .title {
-        color: #444 !important;
-    }
-    .contact-item a {
-        color: #000 !important;
-    }
-    .floating-actions, .status-badge, .header::before {
-        display: none !important;
-    }
-    .sidebar, .experience-item, .education-item, .skill-category, .cert-item {
-        background: white !important;
-        color: #000 !important;
-    }
-    .experience-item, .education-item, .skill-category, .cert-item, .reveal {
-        opacity: 1 !important;
-        transform: none !important;
-        box-shadow: none !important;
-        break-inside: avoid;
-        page-break-inside: avoid;
     }
 }
