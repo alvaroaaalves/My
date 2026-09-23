@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Álvaro Alves - Currículo | Profissional de TI</title>
+    <title>Álvaro Alves - Currículo Profissional | TI e Service Desk</title>
     
-    <!-- Meta tags para compartilhamento em redes sociais (WhatsApp, LinkedIn, etc.) -->
-    <meta property="oh:title" content="Álvaro Alves - Currículo Profissional">
-    <meta property="og:description" content="Profissional de TI com 11 anos de experiência em suporte, análise de processos e docência.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+
+    <!-- Meta tags para compartilhamento (WhatsApp, LinkedIn, etc.) -->
+    <meta property="og:title" content="Álvaro Alves - Currículo Profissional | TI e Service Desk">
+    <meta property="og:description" content="Profissional de TI com 11 anos de experiência em suporte, análise de processos (Zendesk/Suri) e docência.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alvaroaaalves.github.io/">
 
     <style>
         * {
@@ -31,7 +35,7 @@
             margin: 0 auto;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             overflow: hidden;
             animation: fadeInUp 0.8s ease-out;
         }
@@ -356,6 +360,7 @@
             box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
         }
 
+        /* Regras otimizadas para impressão e salvamento em PDF */
         @media print {
             body {
                 background: white;
@@ -375,6 +380,12 @@
             
             .header::before {
                 display: none;
+            }
+
+            .experience-item, .education-item {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                border: 1px solid #e9ecef;
             }
         }
     </style>
@@ -473,10 +484,10 @@
                 <section class="section">
                     <h2 class="section-title">Resumo</h2>
                     <p class="summary">
-                        Profissional de TI com experiência em suporte técnico, análise de processos e docência em informática. 
-                        Atuação em diagnóstico e reparo de sistemas, administração de redes e gestão de chamados em plataformas 
-                        como Zendesk e Suri. Cursando Engenharia da Computação no IFCE, com foco em desenvolvimento de software, 
-                        bancos de dados e inteligência artificial.
+                        Profissional de TI com 11 anos de experiência consolidada em suporte técnico (remoto e presencial) 
+                        e gestão de chamados (Zendesk e Suri). Histórico estratégico em análise de processos na Pague Menos 
+                        e sólida facilidade de comunicação desenvolvida como ex-professor de informática. Cursando Engenharia 
+                        da Computação no IFCE, com conhecimentos complementares em Análise de Dados (Power BI) e infraestrutura.
                     </p>
                 </section>
 
