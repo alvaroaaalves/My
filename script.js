@@ -25,14 +25,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // 2. Geração Dinâmica de PDF respeitando o Tema Ativo
+    // 2. Geração Dinâmica de PDF com suporte nativo a cores estáticas
     const downloadPdfBtn = document.getElementById('downloadPdfBtn');
     if (downloadPdfBtn) {
         downloadPdfBtn.addEventListener('click', function () {
             const element = document.getElementById('cv-content');
             const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
 
-            // Define a cor de fundo do canvas conforme o tema selecionado
+            // Define fundo do canvas explícito para evitar fundo transparente/branco indesejado
             const canvasBgColor = currentTheme === 'dark' ? '#1e293b' : '#ffffff';
 
             // Feedback visual no botão
@@ -40,31 +40,39 @@ document.addEventListener('DOMContentLoaded', function () {
             downloadPdfBtn.textContent = '⏳ Gerando PDF...';
             downloadPdfBtn.disabled = true;
 
-            // Aplica classe auxiliar para ajustar a largura da página no PDF
+            // Aplica classe auxiliar para ajustar formatação no PDF
             element.classList.add('pdf-export');
 
-            // Garante que todos os elementos estão visíveis
+            // Garante que elementos animados fiquem 100% visíveis
             document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
 
             const options = {
                 margin:       [5, 5, 5, 5],
                 filename:     `Curriculo_Alvaro_Alves_NOC_${currentTheme}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, logging: false, backgroundColor: canvasBgColor },
+                html2canvas:  { 
+                    scale: 2, 
+                    useCORS: true, 
+                    logging: false, 
+                    backgroundColor: canvasBgColor,
+                    windowWidth: 1000
+                },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            // Gera e baixa o arquivo
-            html2pdf().set(options).from(element).save().then(() => {
-                element.classList.remove('pdf-export');
-                downloadPdfBtn.textContent = originalText;
-                downloadPdfBtn.disabled = false;
-            }).catch(err => {
-                console.error('Erro ao gerar PDF:', err);
-                element.classList.remove('pdf-export');
-                downloadPdfBtn.textContent = originalText;
-                downloadPdfBtn.disabled = false;
-            });
+            // Pequeno delay para garantir que a classe .pdf-export foi totalmente aplicada no DOM antes da captura
+            setTimeout(() => {
+                html2pdf().set(options).from(element).save().then(() => {
+                    element.classList.remove('pdf-export');
+                    downloadPdfBtn.textContent = originalText;
+                    downloadPdfBtn.disabled = false;
+                }).catch(err => {
+                    console.error('Erro ao gerar PDF:', err);
+                    element.classList.remove('pdf-export');
+                    downloadPdfBtn.textContent = originalText;
+                    downloadPdfBtn.disabled = false;
+                });
+            }, 200);
         });
     }
 
